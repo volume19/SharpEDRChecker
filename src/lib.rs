@@ -28,9 +28,9 @@
 pub mod directory;
 pub mod edr_data;
 pub mod error;
+pub mod file_info;
 pub mod privilege;
 pub mod registry;
-// pub mod file_info;
 // pub mod service;
 // pub mod process;
 // pub mod driver;
