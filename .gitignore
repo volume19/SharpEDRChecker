@@ -2,3 +2,19 @@
 .vscode/
 SharpEDRChecker/bin
 SharpEDRChecker/obj
+
+# Rust
+/target/
+Cargo.lock
+**/*.rs.bk
+*.pdb
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
