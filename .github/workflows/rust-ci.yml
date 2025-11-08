@@ -88,6 +88,80 @@ jobs:
           .\target\release\sharp_edr_checker.exe
         continue-on-error: true
 
+      - name: Verify Windows-specific functionality
+        shell: pwsh
+        run: |
+          Write-Host "Testing Windows-specific modules..."
+
+          # Test that binary runs and produces output
+          $output = .\target\release\sharp_edr_checker.exe 2>&1 | Out-String
+
+          # Verify expected output sections
+          if ($output -match "Welcome to SharpEDRChecker") {
+            Write-Host "✓ Intro banner found"
+          } else {
+            Write-Error "✗ Intro banner missing"
+            exit 1
+          }
+
+          if ($output -match "Checking processes") {
+            Write-Host "✓ Process check section found"
+          } else {
+            Write-Error "✗ Process check section missing"
+            exit 1
+          }
+
+          if ($output -match "Checking.*modules") {
+            Write-Host "✓ Module check section found"
+          } else {
+            Write-Error "✗ Module check section missing"
+            exit 1
+          }
+
+          if ($output -match "Checking Directories") {
+            Write-Host "✓ Directory check section found"
+          } else {
+            Write-Error "✗ Directory check section missing"
+            exit 1
+          }
+
+          if ($output -match "Checking Services") {
+            Write-Host "✓ Service check section found"
+          } else {
+            Write-Error "✗ Service check section missing"
+            exit 1
+          }
+
+          if ($output -match "Checking drivers") {
+            Write-Host "✓ Driver check section found"
+          } else {
+            Write-Error "✗ Driver check section missing"
+            exit 1
+          }
+
+          if ($output -match "TLDR Summary") {
+            Write-Host "✓ Summary section found"
+          } else {
+            Write-Error "✗ Summary section missing"
+            exit 1
+          }
+
+          if ($output -match "EDR Checks Complete") {
+            Write-Host "✓ Completion banner found"
+          } else {
+            Write-Error "✗ Completion banner missing"
+            exit 1
+          }
+
+          Write-Host "`n✅ All Windows integration checks passed!"
+
+      - name: Upload binary artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sharp_edr_checker-windows-x64
+          path: target/release/sharp_edr_checker.exe
+          retention-days: 7
+
   security-audit:
     name: Security Audit
     runs-on: ubuntu-latest

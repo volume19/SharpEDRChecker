@@ -1,6 +1,6 @@
 //! SharpEDRChecker binary entry point
 
-use sharp_edr_checker::{directory, driver, privilege, service};
+use sharp_edr_checker::{directory, driver, privilege, registry, service};
 use sharp_edr_checker::process as edr_process;
 
 fn main() {
@@ -97,6 +97,30 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         Err(e) => {
             println!("[-] Error checking directories: {}\n", e);
             summary.push_str("\n[-] Errored on checking directories\n");
+        }
+    }
+
+    // Check registry
+    println!("####################################");
+    println!("[!][!][!] Checking Registry [!][!][!]");
+    println!("####################################\n");
+
+    match registry::check_registry() {
+        Ok(result) => {
+            println!("{}", result);
+            if result.has_detections() {
+                summary.push_str("\n[!] Registry Summary:\n");
+                for det in &result.detections {
+                    summary.push_str(&format!("\t[-] {} : {}\n", det.key_path, det.matches.join(", ")));
+                }
+            } else {
+                summary.push_str("\n[+] No suspicious registry entries found\n");
+            }
+            println!();
+        }
+        Err(e) => {
+            println!("[-] Error checking registry: {}\n", e);
+            summary.push_str("\n[-] Errored on checking registry\n");
         }
     }
 

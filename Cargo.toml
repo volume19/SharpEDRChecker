@@ -23,11 +23,17 @@ windows-sys = { version = "0.59", features = [
     "Win32_System_Diagnostics_ToolHelp",
     "Win32_System_Threading",
     "Win32_Storage_FileSystem",
+    "Win32_System_Registry",
 ] }
 wmi = "0.13"
 
 [dev-dependencies]
 tempfile = "3.10"
+criterion = "0.5"
+
+[[bench]]
+name = "edr_benchmarks"
+harness = false
 
 [profile.release]
 strip = true
