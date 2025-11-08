@@ -221,7 +221,7 @@ mod tests {
     fn test_find_matches_partial() {
         let matches = find_matches("csfalconservice.exe");
         assert!(matches.contains(&"csfalcon"));
-        assert!(matches.contains(&"crowdstrike") == false); // Should not match crowdstrike
+        assert!(!matches.contains(&"crowdstrike")); // Should not match crowdstrike
     }
 
     #[test]

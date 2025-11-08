@@ -26,11 +26,11 @@
 
 // Module declarations - will be implemented incrementally
 pub mod directory;
+pub mod driver;
 pub mod edr_data;
 pub mod error;
 pub mod file_info;
 pub mod privilege;
+pub mod process;
 pub mod registry;
-// pub mod service;
-// pub mod process;
-// pub mod driver;
+pub mod service;
