@@ -37,8 +37,8 @@ fn test_directory_check_runs() {
     assert!(result.is_ok());
 
     let check_result = result.unwrap();
-    // Count should be >= 0 (empty is valid)
-    assert!(check_result.count() >= 0);
+    // Count returns usize, which is always >= 0, so just verify it's callable
+    let _count = check_result.count();
 }
 
 #[test]
@@ -111,8 +111,7 @@ fn test_all_checkers_non_panic() {
     let _ = process::check_current_process_modules();
     let _ = driver::check_drivers();
 
-    // If we reach here, no panics occurred
-    assert!(true);
+    // If we reach here, no panics occurred - test passes
 }
 
 #[test]
