@@ -7,10 +7,11 @@ use crate::edr_data::find_matches;
 use crate::error::ProcessError;
 #[cfg(windows)]
 use crate::file_info;
+use serde::Serialize;
 use std::fmt;
 
 /// Detection of an EDR/AV product in a running process
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct ProcessDetection {
     /// Process name
     pub name: String,
@@ -31,7 +32,7 @@ pub struct ProcessDetection {
 }
 
 /// Detection of an EDR/AV product in a loaded module
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct ModuleDetection {
     /// Module file path
     pub file_path: String,
@@ -42,7 +43,7 @@ pub struct ModuleDetection {
 }
 
 /// Result of process checking operations
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct CheckResult {
     /// List of process detections found
     pub process_detections: Vec<ProcessDetection>,

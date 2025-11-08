@@ -5,10 +5,11 @@
 #[cfg(windows)]
 use crate::edr_data::find_matches;
 use crate::error::RegistryError;
+use serde::Serialize;
 use std::fmt;
 
 /// Detection of an EDR/AV product in the Windows registry
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct RegistryDetection {
     /// Registry key path
     pub key_path: String,
@@ -21,7 +22,7 @@ pub struct RegistryDetection {
 }
 
 /// Result type for registry checking operations
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct CheckResult {
     /// List of registry detections found
     pub detections: Vec<RegistryDetection>,

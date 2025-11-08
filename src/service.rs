@@ -7,10 +7,11 @@ use crate::edr_data::find_matches;
 use crate::error::ServiceError;
 #[cfg(windows)]
 use crate::file_info;
+use serde::Serialize;
 use std::fmt;
 
 /// Detection of an EDR/AV product in a Windows service
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct ServiceDetection {
     /// Service name
     pub name: String,
@@ -31,7 +32,7 @@ pub struct ServiceDetection {
 }
 
 /// Result of service checking operations
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct CheckResult {
     /// List of service detections found
     pub detections: Vec<ServiceDetection>,

@@ -4,12 +4,13 @@
 
 use crate::edr_data::find_matches;
 use crate::error::DirectoryError;
+use serde::Serialize;
 use std::fmt;
 use std::fs;
 use std::path::PathBuf;
 
 /// A detection of an EDR/AV product in a directory
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct Detection {
     /// Path to the detected directory
     pub path: PathBuf,
@@ -18,7 +19,7 @@ pub struct Detection {
 }
 
 /// Result of directory checking operations
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct CheckResult {
     /// List of detections found
     pub detections: Vec<Detection>,

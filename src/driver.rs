@@ -7,10 +7,11 @@ use crate::edr_data::find_matches;
 use crate::error::DriverError;
 #[cfg(windows)]
 use crate::file_info;
+use serde::Serialize;
 use std::fmt;
 
 /// Detection of an EDR/AV product in a kernel driver
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct DriverDetection {
     /// Driver base name (e.g., "csagent.sys")
     pub base_name: String,
@@ -23,7 +24,7 @@ pub struct DriverDetection {
 }
 
 /// Result of driver checking operations
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct CheckResult {
     /// List of driver detections found
     pub detections: Vec<DriverDetection>,

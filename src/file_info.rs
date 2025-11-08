@@ -3,10 +3,11 @@
 //! Extracts metadata from Windows executable files (.exe, .dll, .sys).
 
 use crate::error::FileError;
+use serde::Serialize;
 use std::path::Path;
 
 /// File version information extracted from PE metadata
-#[derive(Debug, Clone, Default, PartialEq, Eq)]
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize)]
 pub struct FileVersionInfo {
     /// Product name from version resources
     pub product_name: Option<String>,
